@@ -25,18 +25,12 @@ def predict():
         return jsonify({"error": "Missing 'features' in request data."}), 400
 
     try:
-        # Reshape the input features to a 2D array
         features = np.array(data["features"]).reshape(1, -1)
-
-        # Make the prediction
         prediction = model.predict(features)[0]
-
-        # Create the response
         response = {"prediction": target_names[prediction]}
         return jsonify(response)
 
     except Exception as e:
-        # Return an error response if there is an exception
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
